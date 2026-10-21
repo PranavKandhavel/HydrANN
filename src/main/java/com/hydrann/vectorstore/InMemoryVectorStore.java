@@ -13,7 +13,10 @@ public class InMemoryVectorStore implements VectorStore {
     public InMemoryVectorStore() {
         this.entries = new ArrayList<>();
     }
-
+        @Override public int idLimit()              { return entries.size(); }
+        @Override public boolean isActive(int id)   { return id >= 0 && id < entries.size(); }
+        @Override public float[] vector(int id)     { return entries.get(id).getEmbedding(); }
+        @Override public ChunkEmbedding get(int id) { return entries.get(id); }
     @Override
     public void add(ChunkEmbedding chunkEmbedding) {
 
@@ -118,6 +121,8 @@ public class InMemoryVectorStore implements VectorStore {
     public int size() {
         return entries.size();
     }
+
+
 
     /*
      * Dot product:

@@ -16,4 +16,8 @@ public interface VectorStore {
     );
 
     int size();
+    int idLimit();                       // ids are 0..idLimit-1, including deactivated
+    boolean isActive(int id);
+    float[] vector(int id);              // raw vector only, no object building
+    ChunkEmbedding get(int id); 
 }
